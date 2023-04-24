@@ -16,6 +16,10 @@ int num = 0;
 va_start(args, format);
 while (*format != '\0')
 {
+if (*format == '%')
+{
+format++;
+
 if (*format == 'c')
 {
 char arg = va_arg(args, int);
@@ -28,14 +32,14 @@ char *arg = va_arg(args, char *);
 printf("%s", arg);
 num += strlen(arg);
 }
-else if(*format == '%')
+else if (*format == '%')
 {
 putchar('%');
 num++;
 }
-num++;
+format++;
+}
 }
 va_end(args);
-
 return (num);
 }
