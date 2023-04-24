@@ -20,8 +20,6 @@ int _printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			if (*(format + 1) == '\0')
-				break;
 			format++;
 
 			switch (*format)
@@ -38,6 +36,9 @@ int _printf(const char *format, ...)
 					num++;
 					break;
 				default:
+					putchar('%');
+					putchar(*format);
+					num += 2;
 					break;
 			}
 		}
