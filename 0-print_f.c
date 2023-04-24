@@ -11,7 +11,7 @@
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
+	va_list args = NULL;
 	int num = 0;
 
 	if (!format)
