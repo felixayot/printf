@@ -1,8 +1,4 @@
 #include "main.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
 /**
  *_printf - function prototype
  * Description: produces output according to a format.
