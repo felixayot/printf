@@ -12,33 +12,39 @@ int _printf(const char *format, ...)
 {
 va_list args;
 int num = 0;
-
+int len;
+const char *str;
 va_start(args, format);
 while (*format != '\0')
 {
 if (*format == '%')
 {
 format++;
-
-if (*format == 'c')
+switch (*format)
 {
-char arg = va_arg(args, int);
-putchar(arg);
+case 'c':
+putchar(va_arg(args, int));
 num++;
-}
-else if (*format == 's')
-{
-char *arg = va_arg(args, char *);
-printf("%s", arg);
-num += strlen(arg);
-}
-else if (*format == '%')
-{
+break;
+case 's':
+str = va_arg(args, const char *);
+len = printf("%s", str);
+num += len;
+break;
+case '%':
 putchar('%');
+num++;
+break;
+default:
+break;
+}
+}
+else
+{
+putchar(*format);
 num++;
 }
 format++;
-}
 }
 va_end(args);
 return (num);
