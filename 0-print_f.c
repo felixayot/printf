@@ -28,7 +28,7 @@ num++;
 break;
 case 's':
 str = va_arg(args, const char *);
-len = printf("%s", str);
+len = strlen(str);
 num += len;
 break;
 case '%':
