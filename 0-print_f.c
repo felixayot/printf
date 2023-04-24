@@ -38,6 +38,9 @@ int _printf(const char *format, ...)
 					num++;
 					break;
 				default:
+					putchar('%');
+					putchar(*format);
+					num += 2;
 					break;
 			}
 		}
