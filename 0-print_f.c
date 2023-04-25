@@ -15,17 +15,31 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (*format != '\0')
 	{
-		if (!*format)
+		if (*format == '%' && *(format + 1) == '\0')
 			return (-1);
-		(*format == '%') ? (
-			++format,
-			(*format == 'c') ? (num++, putchar(va_arg(args, int))) :
-			(*format == 's') ? (num += printf("%s", va_arg(args, char *))) :
-			(*format == '%') ? (num++, putchar('%')) :
-			(*format == 'd' || *format == 'i') ?
-			(num += printf("%d", va_arg(args, int))) :
-			(putchar('%'), putchar(*format), num += 2), 0
-		) : (putchar(*format), num++, 0), format++;
+
+		if (*format == '%' && *(format + 1) == '%')
+		{
+			putchar('%');
+			num++;
+			format += 2;
+			continue;
+		}
+		if (*format == '%')
+		{
+			format++;
+			num += (*format == 'c') ? (putchar(va_arg(args, int)), num++, 0) :
+				((*format == 's') && va_arg(args, char *)) ?
+				(num += printf("%s", va_arg(args, char *))) :
+				((*format == 'd') || (*format == 'i')) ?
+				(num += printf("%d", va_arg(args, int))) :
+				(putchar('%'), putchar(*format), num += 2);
+		}
+		else
+		{
+			putchar(*format), num++;
+		}
+		format++;
 	}
 	va_end(args);
 	return (num);
