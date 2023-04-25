@@ -26,7 +26,5 @@ int _printf(const char *format, ...)
 		) : (putchar(*format), num++, 0), format++;
 	}
 	va_end(args);
-	if (*(format - 1) == '%')
-		return (-1);
 	return (num);
 }
