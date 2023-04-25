@@ -9,7 +9,6 @@ int _printf(const char *format, ...)
 {
 	va_list args;
 	int num = 0;
-	size_t b;
 
 	if (!format)
 		return (-1);
@@ -39,12 +38,7 @@ int _printf(const char *format, ...)
 					num += printf("%d", va_arg(args, int));
 					break;
 				case 'b':
-					{
-					b = va_arg(args, size_t);
-					bit = malloc(sizeof(b) * 8 - 1);
-					for (, bit >= 0; b--)
-						num += putchar((n >> bit) & 1 ? '1' : '0');
-					}
+					num += printf("%u", va_arg(args, size_t));
 					break;
 				case 'u':
 					num += printf("%u", va_arg(args, size_t));
