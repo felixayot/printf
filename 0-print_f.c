@@ -33,6 +33,9 @@ int _printf(const char *format, ...)
 					putchar('%');
 					num++;
 					break;
+				case 'd':
+				case 'i':
+					num += printf("%d", va_arg(args, int));
 				default:
 					putchar('%');
 					putchar(*format);
@@ -42,8 +45,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			putchar(*format);
-			num++;
+			putchar(*format), num++;
 		}
 		format++;
 	}
