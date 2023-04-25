@@ -42,7 +42,8 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			putchar(*format), num++;
+			putchar(*format);
+			num++;
 		}
 		format++;
 	}
