@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 					num += printf("%d", va_arg(args, int));
 					break;
 				case 'b':
-					num += printf("%b", va_arg(args, size_t));
+					num += printf("%u", va_arg(args, size_t));
 					break;
 				case 'u':
 					num += printf("%u", va_arg(args, size_t));
@@ -47,13 +47,13 @@ int _printf(const char *format, ...)
 					num += printf("%u", va_arg(args, size_t));
 					break;
 				case 'x':
-					num += printf("%x", va_arg(args, size_t));
+					num += printf("%u", va_arg(args, size_t));
 					break;
 				case 'X':
-					num += printf("%X", va_arg(args, size_t));
+					num += printf("%u", va_arg(args, size_t));
 					break;
 				case 'p':
-					num += printf("%p", va_arg(args, size_t));
+					num += printf("%u", va_arg(args, size_t));
 					break'
 				default:
 					putchar('%');
