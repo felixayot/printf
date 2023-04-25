@@ -13,19 +13,39 @@ int _printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	va_start(args, format);
-	while (*format != '\0')
+	while (*format)
 	{
-		if (!*format)
-			return (-1);
-		(*format == '%') ? (
-				++format,
-				(*format == 'c') ? (num++, putchar(va_arg(args, int))) :
-				(*format == 's') ? (num += printf("%s", va_arg(args, char *))) :
-				(*format == '%') ? (num++, putchar('%')) :
-				(*format == 'd' || *format == 'i') ?
-				(num += printf("%d", va_arg(args, int))) :
-				(putchar('%'), putchar(*format), num += 2), 0
-				) : (putchar(*format), num++, 0), format++;
+		if (*format == '%')
+		{
+			format++;
+			if (!*format)
+				return (-1);
+			switch (*format)
+			{
+				case 'c':
+					putchar(va_arg(args, int));
+					num++;
+					break;
+				case 's':
+					num += printf("%s", va_arg(args, char *));
+					break;
+				case '%':
+					putchar('%');
+					num++;
+					break;
+				default:
+					putchar('%');
+					putchar(*format);
+					num += 2;
+					break;
+			}
+		}
+		else
+		{
+			putchar(*format);
+			num++;
+		}
+		format++;
 	}
 	va_end(args);
 	return (num);
