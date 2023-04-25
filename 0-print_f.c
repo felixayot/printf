@@ -22,6 +22,8 @@ int _printf(const char *format, ...)
 					num++, putchar(va_arg(args, int))
 				) : *format == 's' ? (
 					num += printf("%s", va_arg(args, char *))
+				) : *format == '%' ? (
+					num++, putchar('%')
 				) : *format == 'd' || *format == 'i' ? (
 					num += printf("%d", va_arg(args, int))
 				) : (
