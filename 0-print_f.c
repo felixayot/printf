@@ -44,7 +44,7 @@ int _printf(const char *format, ...)
 					num += printf("%u", va_arg(args, size_t));
 					break;
 				case 'o':
-					num += printf("%o", va_arg(args, size_t));
+					num += printf("%u", va_arg(args, size_t));
 					break;
 				case 'x':
 					num += printf("%x", va_arg(args, size_t));
