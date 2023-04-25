@@ -15,10 +15,6 @@ int _printf(const char *format, ...)
 	va_start(args, format);
 	while (*format != '\0')
 	{
-		if (!*format)
-		{
-			return (-1);
-		}
 		*format == '%' ? (
 			*++format == '\0' ? (va_end(args), -1) :
 			*format == 'c' ? (num++, putchar(va_arg(args, int))) :
