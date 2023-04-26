@@ -26,14 +26,12 @@ int _printf(const char *format, ...)
 			{
 				case 'c':
 					buffer[num++] = va_arg(args, int);
-					num++;
 					break;
 				case 's':
 					num += sprintf(buffer + num, "%s", va_arg(args, char *));
 					break;
 				case '%':
 					buffer[num++] = '%';
-					num++;
 					break;
 				case 'd':
 				case 'i':
