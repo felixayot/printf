@@ -8,7 +8,7 @@
  */
 int _printf(const char *format, ...)
 {
-	char buffer[BUFFSIZE];
+	char buffer[BUFSIZE];
 	va_list args;
 	int num = 0;
 
