@@ -1,4 +1,5 @@
 #include "main.h"
+#define BUFSIZE 1024
 /**
  *_printf - function prototype
  * Description: produces output according to a format.
@@ -7,6 +8,7 @@
  */
 int _printf(const char *format, ...)
 {
+	char buffer[BUFFSIZE];
 	va_list args;
 	int num = 0;
 
@@ -23,37 +25,37 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 				case 'c':
-					putchar(va_arg(args, int));
+					buffer[num++] = va_arg(args, int);
 					num++;
 					break;
 				case 's':
-					num += printf("%s", va_arg(args, char *));
+					num += sprintf(buffer + num, "%s", va_arg(args, char *));
 					break;
 				case '%':
-					putchar('%');
+					buffer[num++] = '%';
 					num++;
 					break;
 				case 'd':
 				case 'i':
-					num += printf("%d", va_arg(args, int));
+					num += sprintf(buffer + num, "%d", va_arg(args, int));
 					break;
 				case 'b':
-					num += printf("%u", va_arg(args, size_t));
+					num += sprintf(buffer + num, "%u", va_arg(args, size_t));
 					break;
 				case 'u':
-					num += printf("%u", va_arg(args, size_t));
+					num += sprintf(buffer + num, "%u", va_arg(args, size_t));
 					break;
 				case 'o':
-					num += printf("%o", va_arg(args, size_t));
+					num += sprintf(buffer + num, "%o", va_arg(args, size_t));
 					break;
 				case 'x':
-					num += printf("%x", va_arg(args, size_t));
+					num += sprintf(buffer + num, "%x", va_arg(args, size_t));
 					break;
 				case 'X':
-					num += printf("%X", va_arg(args, size_t));
+					num += sprintf(buffer + num, "%X", va_arg(args, size_t));
 					break;
 				case 'p':
-					num += printf("%p", va_arg(args, void *));
+					num += sprintf(buffer + num, "%p", va_arg(args, void *));
 					break;
 				default:
 					putchar('%');
@@ -64,11 +66,12 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			putchar(*format);
+			buffer[num++] = *format;
 			num++;
 		}
 		format++;
 	}
 	va_end(args);
+	write(1, buffer, num);
 	return (num);
 }
